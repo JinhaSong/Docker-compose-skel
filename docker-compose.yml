@@ -1,8 +1,8 @@
 version: '2.3'
 
 services:
-  main:
-    container_name: name
+  dev:
+    container_name: dev
     runtime: nvidia
     restart: always
     build:
