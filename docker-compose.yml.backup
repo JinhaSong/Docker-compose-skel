@@ -1,0 +1,35 @@
+version: '2.3'
+
+services:
+  main:
+    container_name: name
+    runtime: nvidia
+    restart: always
+    build:
+      context: ./
+      dockerfile: docker/dev/dockerfile
+    env_file:
+      - "docker/env.env"
+    env_file:
+      - "docker-compose-env/main.env"
+    volumes:
+      - ${PWD}:/workspace
+      - dataset:/dataset
+    ports:
+      - "10000:8000"
+      - "10022:22"
+    stdin_open: true
+    tty: true
+
+volumes:
+  dataset:
+    driver: local
+    driver_opts:
+      type: none
+      device: /media/hdd/dataset
+      o: bind
+  nfs_shared:
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.0.100,nolock,soft,rw"
+      device: ":/volume1/data"
