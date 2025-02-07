@@ -10,8 +10,6 @@ services:
       dockerfile: docker/dev/dockerfile
     env_file:
       - "docker/env.env"
-    env_file:
-      - "docker-compose-env/main.env"
     volumes:
       - ${PWD}:/workspace
       - dataset:/dataset
